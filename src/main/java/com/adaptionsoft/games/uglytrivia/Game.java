@@ -108,10 +108,6 @@ public class Game {
 		if (places[currentPlayer] == 9) return "Science";
 		if (places[currentPlayer] == 2) return "Sports";
 		if (places[currentPlayer] == 6) return "Sports";
-		if (places[currentPlayer] == 10) return "Rock";
-		if (places[currentPlayer] == 10) return "Rock";
-		if (places[currentPlayer] == 10) return "Rock";
-		if (places[currentPlayer] == 10) return "Rock";
 		return "Rock";
 	}
 

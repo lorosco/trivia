@@ -2,14 +2,18 @@ package com.adaptionsoft.games.uglytrivia;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Game {
-    ArrayList players = new ArrayList();
+    ArrayList<String> players = new ArrayList<>();
     int[] places = new int[6];
     int[] purses  = new int[6];
     boolean[] inPenaltyBox  = new boolean[6];
+    List<Category> inGameCategories = new ArrayList<>();
     
-    LinkedList popQuestions = new LinkedList();
+
+	LinkedList popQuestions = new LinkedList();
     LinkedList scienceQuestions = new LinkedList();
     LinkedList sportsQuestions = new LinkedList();
     LinkedList rockQuestions = new LinkedList();
@@ -165,4 +169,34 @@ public class Game {
 	private boolean didPlayerWin() {
 		return !(purses[currentPlayer] == 6);
 	}
+	
+    public ArrayList getPlayers() {
+		return players;
+	}
+
+	public List<Category> getInGameCategories() {
+		return inGameCategories;
+	}
+	
+	public void selectCategories(List<Category> categories) {
+		Scanner in = new Scanner(System.in);
+		for(String player : this.players) {
+			System.out.println("Player \"" + player + "\", please pick a category below :");
+			for(int i = 0 ; i<categories.size() ; i ++) {
+				System.out.println(i + 1 + ": " + categories.get(i).getCategoryType());
+			}
+			System.out.println("Your choice ? ");
+			String choice = in.nextLine();
+			System.out.println("0: No choice \n");
+			if(Integer.parseInt(choice) > 0) {
+				this.inGameCategories.add(categories.get(Integer.parseInt(choice) - 1));
+			}
+		}
+		
+		
+		
+		
+	}
+
+
 }

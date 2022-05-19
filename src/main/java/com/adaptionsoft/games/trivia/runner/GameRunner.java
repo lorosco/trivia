@@ -29,7 +29,13 @@ public class GameRunner {
 		aGame.add("Pat");
 		aGame.add("Sue");
 		
-		Random rand = new Random();
+		aGame.selectCategories(categoryList);
+		System.out.println("Categories selected :");
+		for(Category cat : aGame.getInGameCategories()) {
+			System.out.println(cat.getCategoryType());
+		}
+		
+		/*Random rand = new Random();
 	
 		do {
 			
@@ -43,7 +49,7 @@ public class GameRunner {
 			
 			
 			
-		} while (notAWinner);
+		} while (notAWinner);*/
 		
 	}
 }

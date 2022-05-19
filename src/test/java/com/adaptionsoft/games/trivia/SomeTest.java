@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class SomeTest {
 
     @Test
-    public void true_is_true() throws Exception {
+    public void true_is_true(){
         assertTrue(true);
     }
 
@@ -91,4 +91,21 @@ public class SomeTest {
         //Check with 2 percent error as random is fucked up
         assertTrue(increase_percent+3 >= Math.round(percent_increase) && increase_percent-3 <= Math.round(percent_increase));
     }
+
+    @Test
+    public void is_game_stop_if_too_few_player(){
+        Game aGame = new Game();
+        Random rand = new Random();
+        aGame.add("Pat");
+        aGame.roll(rand.nextInt(5) + 1);
+    }
+
+    @Test
+    public void is_game_stop_if_too_many_player(){
+        Game aGame = new Game();
+        for (int i = 0; i <= 6; i++) {
+            aGame.add("Pat"+i);
+        }
+    }
+
 }

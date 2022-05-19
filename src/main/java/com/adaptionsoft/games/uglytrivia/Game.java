@@ -34,17 +34,20 @@ public class Game {
 	}
 	
 	public boolean isPlayable() {
-		return (howManyPlayers() >= 2);
+		return (howManyPlayers() >= 2 && howManyPlayers() <= 6);
 	}
 
 	public boolean add(String playerName) {
-		
+		if(howManyPlayers() >= 6){
+			System.out.println("Too many players are added to this game");
+			return false;
+		}
 		
 	    players.add(playerName);
 		luckToEscape.add(0);
-	    places[howManyPlayers()] = 0;
-	    purses[howManyPlayers()] = 0;
-	    inPenaltyBox[howManyPlayers()] = false;
+	    places[howManyPlayers()-1] = 0;
+	    purses[howManyPlayers()-1] = 0;
+	    inPenaltyBox[howManyPlayers()-1] = false;
 	    
 	    System.out.println(playerName + " was added");
 	    System.out.println("He is the player number " + players.size());
@@ -58,7 +61,7 @@ public class Game {
 	public void roll(int roll) {
 		if(!isPlayable()){
 			System.out.println("There isn't enough player to start the game");
-			System.exit(0);
+			return;
 		}
 		System.out.println(players.get(currentPlayer) + " is the current player");
 		System.out.println("They have rolled a " + roll);

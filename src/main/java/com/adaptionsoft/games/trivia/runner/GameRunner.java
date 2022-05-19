@@ -14,7 +14,6 @@ public class GameRunner {
 		aGame.setLuckIncrease(10);
 		aGame.add("Chet");
 		aGame.add("Pat");
-		aGame.add("Sue");
 		
 		Random rand = new Random();
 	

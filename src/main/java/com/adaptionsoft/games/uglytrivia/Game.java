@@ -2,9 +2,12 @@ package com.adaptionsoft.games.uglytrivia;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Game {
     ArrayList players = new ArrayList();
+	ArrayList<Integer> luckToEscape = new ArrayList<>();
+	int luckIncrease = 10;
     int[] places = new int[6];
     int[] purses  = new int[6];
     boolean[] inPenaltyBox  = new boolean[6];
@@ -38,6 +41,7 @@ public class Game {
 		
 		
 	    players.add(playerName);
+		luckToEscape.add(0);
 	    places[howManyPlayers()] = 0;
 	    purses[howManyPlayers()] = 0;
 	    inPenaltyBox[howManyPlayers()] = false;
@@ -55,10 +59,9 @@ public class Game {
 		System.out.println(players.get(currentPlayer) + " is the current player");
 		System.out.println("They have rolled a " + roll);
 		
-		if (inPenaltyBox[currentPlayer]) {
-			if (roll % 2 != 0) {
+		if (inPenaltyBox[currentPlayer]){
+			if(doPlayerEscape(roll)) {
 				isGettingOutOfPenaltyBox = true;
-				
 				System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
 				places[currentPlayer] = places[currentPlayer] + roll;
 				if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
@@ -85,6 +88,17 @@ public class Game {
 			askQuestion();
 		}
 		
+	}
+
+	public boolean doPlayerEscape(int roll) {
+		int luck = luckToEscape.get(currentPlayer);
+		if(Math.random()*100 > luck && roll % 2 == 0){
+			luckToEscape.set(currentPlayer,luck+luckIncrease);
+			return false;
+		}else{
+			luckToEscape.set(currentPlayer,0);
+			return true;
+		}
 	}
 
 	private void askQuestion() {
@@ -115,6 +129,7 @@ public class Game {
 	public boolean wasCorrectlyAnswered() {
 		if (inPenaltyBox[currentPlayer]){
 			if (isGettingOutOfPenaltyBox) {
+				inPenaltyBox[currentPlayer] = false;
 				System.out.println("Answer was correct!!!!");
 				purses[currentPlayer]++;
 				System.out.println(players.get(currentPlayer) 
@@ -165,5 +180,17 @@ public class Game {
 
 	private boolean didPlayerWin() {
 		return !(purses[currentPlayer] == 6);
+	}
+
+	public boolean isPlayerInPrison(int index){
+		return inPenaltyBox[index];
+	}
+
+	public boolean[] getPenaltyBox(){
+		return inPenaltyBox;
+	}
+
+	public void setLuckIncrease(int luck){
+		luckIncrease = luck;
 	}
 }

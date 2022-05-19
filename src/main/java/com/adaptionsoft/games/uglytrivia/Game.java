@@ -15,7 +15,7 @@ public class Game {
     LinkedList popQuestions = new LinkedList();
     LinkedList scienceQuestions = new LinkedList();
     LinkedList sportsQuestions = new LinkedList();
-    LinkedList rockQuestions = new LinkedList();
+	public LinkedList TechnoQuestions = new LinkedList();
     
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
@@ -25,12 +25,12 @@ public class Game {
 			popQuestions.addLast("Pop Question " + i);
 			scienceQuestions.addLast(("Science Question " + i));
 			sportsQuestions.addLast(("Sports Question " + i));
-			rockQuestions.addLast(createRockQuestion(i));
+			TechnoQuestions.addLast(i);
     	}
     }
 
-	public String createRockQuestion(int index){
-		return "Rock Question " + index;
+	public String createTechnoQuestion(int index){
+		return "Techno Question " + index;
 	}
 	
 	public boolean isPlayable() {
@@ -112,8 +112,8 @@ public class Game {
 			System.out.println(scienceQuestions.removeFirst());
 		if (currentCategory() == "Sports")
 			System.out.println(sportsQuestions.removeFirst());
-		if (currentCategory() == "Rock")
-			System.out.println(rockQuestions.removeFirst());		
+		if (currentCategory() == "Techno")
+			System.out.println(TechnoQuestions.removeFirst());		
 	}
 	
 	
@@ -126,7 +126,7 @@ public class Game {
 		if (places[currentPlayer] == 9) return "Science";
 		if (places[currentPlayer] == 2) return "Sports";
 		if (places[currentPlayer] == 6) return "Sports";
-		return "Rock";
+		return "Techno";
 	}
 
 	public boolean wasCorrectlyAnswered() {

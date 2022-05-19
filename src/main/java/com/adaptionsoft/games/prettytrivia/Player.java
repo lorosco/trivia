@@ -3,11 +3,20 @@ package com.adaptionsoft.games.prettytrivia;
 public class Player {
 
     private String name;
-    private Integer prison_count;
-    
-    public Player(String name) {
+    private Integer prisonCount, coins;
+
+	public Integer getCoins() {
+		return coins;
+	}
+
+	public void setCoins(Integer coins) {
+		this.coins = coins;
+	}
+
+	public Player(String name) {
     	this.name = name;
-        this.prison_count = 0;
+        this.prisonCount = 0;
+		this.coins = 0;
     }
     
 	public String getName() {
@@ -19,14 +28,14 @@ public class Player {
 	}
     
     public Integer getPrisonCount() {
-		return prison_count;
+		return prisonCount;
 	}
 
 	public void setPrisonCount(Integer prison_count) {
-		this.prison_count = prison_count;
+		this.prisonCount = prison_count;
 	}
 
 	public double chanceOfGettingOutOfPrison() {
-    	return 1/this.prison_count;
+    	return 1/this.prisonCount;
     }
 }

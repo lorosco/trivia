@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.adaptionsoft.games.Category;
-import com.adaptionsoft.games.CategoryType;
+import com.adaptionsoft.games.uglytrivia.Category;
+import com.adaptionsoft.games.uglytrivia.CategoryType;
 import com.adaptionsoft.games.uglytrivia.Game;
 
 

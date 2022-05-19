@@ -1,4 +1,4 @@
-package com.adaptionsoft.games;
+package com.adaptionsoft.games.uglytrivia;
 
 import java.util.HashMap;
 import java.util.Map;

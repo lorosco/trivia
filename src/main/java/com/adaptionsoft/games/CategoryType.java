@@ -16,11 +16,11 @@ public enum CategoryType {
     PEOPLE("People");
 
     String category;
-    private static final Map<String, CategoryType> RELATIONS = new HashMap<>();
+    private static final Map<String, CategoryType> CATEGORIES = new HashMap<>();
 
     static {
-        for (CategoryType relationType : values()) {
-            RELATIONS.put(relationType.getCategory(), relationType);
+        for (CategoryType categoryType : values()) {
+            CATEGORIES.put(categoryType.getCategory(), categoryType);
         }
     }
 

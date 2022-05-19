@@ -7,6 +7,7 @@ public class Player {
     
     public Player(String name) {
     	this.name = name;
+        this.prison_count = 0;
     }
     
 	public String getName() {
@@ -17,12 +18,12 @@ public class Player {
 		this.name = name;
 	}
     
-    public Integer getTimeInPrison() {
+    public Integer getPrisonCount() {
 		return prison_count;
 	}
 
-	public void setTimeInPrison(Integer timeInPrison) {
-		this.prison_count = timeInPrison;
+	public void setPrisonCount(Integer prison_count) {
+		this.prison_count = prison_count;
 	}
 
 	public double chanceOfGettingOutOfPrison() {

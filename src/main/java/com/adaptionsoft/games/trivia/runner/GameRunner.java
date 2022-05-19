@@ -31,9 +31,11 @@ public class GameRunner {
 		
 		aGame.selectCategories(categoryList);
 		System.out.println("Categories selected :");
+
 		for(CategoryType cat : aGame.getInGameCategories()) {
 			System.out.println(cat);
 		}
+		
 		
 		Random rand = new Random();
 	

@@ -1,13 +1,15 @@
 package com.adaptionsoft.games.prettytrivia;
 
+import java.io.Console;
+
 public class Player {
 
     private String name;
-    private Integer prison_count;
+    private Integer prisonCount;
     
     public Player(String name) {
     	this.name = name;
-        this.prison_count = 0;
+        this.prisonCount = 0;
     }
     
 	public String getName() {
@@ -19,14 +21,29 @@ public class Player {
 	}
     
     public Integer getPrisonCount() {
-		return prison_count;
+		return prisonCount;
 	}
 
-	public void setPrisonCount(Integer prison_count) {
-		this.prison_count = prison_count;
+	public void setPrisonCount(Integer prisonCount) {
+		this.prisonCount = prisonCount;
+	}
+	
+	public void resetPrisonCount() {
+		setPrisonCount(0);
+	}
+	
+	public void incrementPrisonCount(int incr) {
+		this.prisonCount += incr;
+	}
+	
+	public void incrementPrisonCount() {
+		incrementPrisonCount(1);
 	}
 
-	public double chanceOfGettingOutOfPrison() {
-    	return 1/this.prison_count;
+	public double chanceOfGettingOutOfPrison() throws IllegalArgumentException {
+		if(prisonCount < 1) {
+			throw new IllegalArgumentException();
+		}
+    	return (double) 1/this.prisonCount;
     }
 }

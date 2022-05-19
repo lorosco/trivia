@@ -3,6 +3,7 @@ package com.adaptionsoft.games.uglytrivia;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Game {
     ArrayList players = new ArrayList();
@@ -15,22 +16,52 @@ public class Game {
     LinkedList popQuestions = new LinkedList();
     LinkedList scienceQuestions = new LinkedList();
     LinkedList sportsQuestions = new LinkedList();
-    LinkedList rockQuestions = new LinkedList();
+	public LinkedList TechnoQuestions = new LinkedList();
+	LinkedList RockQuestions = new LinkedList();
+	boolean isRockReplaced = false;
+	String resultReplaceRockQuestion;
     
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
     
     public  Game(){
+		replaceRockQuestionByTechnoQuestion();
+		if (resultReplaceRockQuestion.equals("y")) 
+		{
+			isRockReplaced = true;
+		}
+		else{
+			isRockReplaced = false;
+		}
+
     	for (int i = 0; i < 50; i++) {
 			popQuestions.addLast("Pop Question " + i);
 			scienceQuestions.addLast(("Science Question " + i));
 			sportsQuestions.addLast(("Sports Question " + i));
-			rockQuestions.addLast(createRockQuestion(i));
+
+			if (isRockReplaced) {
+				TechnoQuestions.addLast(createTechnoQuestion(i));
+			}
+			else{
+				RockQuestions.addLast(createRockQuestion(i));
+			}
     	}
+
     }
 
 	public String createRockQuestion(int index){
 		return "Rock Question " + index;
+	}
+
+	public void replaceRockQuestionByTechnoQuestion(){
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Remplacer la categorie Rock par Techno ? (y/n) :");
+		String str = sc.nextLine();
+		resultReplaceRockQuestion = str;
+	}
+
+	public String createTechnoQuestion(int index){
+		return "Techno Question " + index;
 	}
 	
 	public boolean isPlayable() {
@@ -113,7 +144,9 @@ public class Game {
 		if (currentCategory() == "Sports")
 			System.out.println(sportsQuestions.removeFirst());
 		if (currentCategory() == "Rock")
-			System.out.println(rockQuestions.removeFirst());		
+			System.out.println(RockQuestions.removeFirst());		
+		if (currentCategory() == "Techno")
+			System.out.println(TechnoQuestions.removeFirst());		
 	}
 	
 	
@@ -126,6 +159,8 @@ public class Game {
 		if (places[currentPlayer] == 9) return "Science";
 		if (places[currentPlayer] == 2) return "Sports";
 		if (places[currentPlayer] == 6) return "Sports";
+		if(resultReplaceRockQuestion.equals("y")) return "Techno";
+
 		return "Rock";
 	}
 

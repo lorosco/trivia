@@ -52,7 +52,7 @@ public class SomeTest {
         }
         double percent_increase = ((double)numberOfEscapeSecondTurn/(double)numberOfOccurence)*100;
         //Check with 2 percent error as random is fucked up
-        assertTrue(increase_percent+2 >= Math.round(percent_increase) && increase_percent-2 <= Math.round(percent_increase));
+        assertTrue(increase_percent+3 >= Math.round(percent_increase) && increase_percent-3 <= Math.round(percent_increase));
     }
     @Test
     public void do_escape_luck_increase_of_15_percent(){
@@ -89,6 +89,6 @@ public class SomeTest {
         }
         double percent_increase = ((double)numberOfEscapeSecondTurn/(double)numberOfOccurence)*100;
         //Check with 2 percent error as random is fucked up
-        assertTrue(increase_percent+2 >= Math.round(percent_increase) && increase_percent-2 <= Math.round(percent_increase));
+        assertTrue(increase_percent+3 >= Math.round(percent_increase) && increase_percent-3 <= Math.round(percent_increase));
     }
 }

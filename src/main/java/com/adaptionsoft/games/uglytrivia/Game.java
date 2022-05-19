@@ -3,8 +3,10 @@ package com.adaptionsoft.games.uglytrivia;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import com.adaptionsoft.games.prettytrivia.Player;
+
 public class Game {
-    ArrayList players = new ArrayList();
+    ArrayList<Player> players = new ArrayList<Player>();
     int[] places = new int[6];
     int[] purses  = new int[6];
     boolean[] inPenaltyBox  = new boolean[6];
@@ -34,15 +36,15 @@ public class Game {
 		return (howManyPlayers() >= 2);
 	}
 
-	public boolean add(String playerName) {
+	public boolean add(Player player) {
 		
 		
-	    players.add(playerName);
+	    players.add(player);
 	    places[howManyPlayers()] = 0;
 	    purses[howManyPlayers()] = 0;
 	    inPenaltyBox[howManyPlayers()] = false;
 	    
-	    System.out.println(playerName + " was added");
+	    System.out.println(player.getName() + " was added");
 	    System.out.println("They are player number " + players.size());
 		return true;
 	}

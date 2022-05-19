@@ -56,6 +56,10 @@ public class Game {
 	}
 
 	public void roll(int roll) {
+		if(!isPlayable()){
+			System.out.println("There isn't enough player to start the game");
+			System.exit(0);
+		}
 		System.out.println(players.get(currentPlayer) + " is the current player");
 		System.out.println("They have rolled a " + roll);
 		

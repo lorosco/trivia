@@ -2,14 +2,20 @@ package com.adaptionsoft.games.uglytrivia;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 public class Game {
-    ArrayList players = new ArrayList();
+    ArrayList<String> players = new ArrayList<>();
     int[] places = new int[6];
     int[] purses  = new int[6];
     boolean[] inPenaltyBox  = new boolean[6];
+    List<CategoryType> inGameCategories = new ArrayList<>();
+    CategoryType currentTurnCategories = null;
     
-    LinkedList popQuestions = new LinkedList();
+
+	LinkedList popQuestions = new LinkedList();
     LinkedList scienceQuestions = new LinkedList();
     LinkedList sportsQuestions = new LinkedList();
     LinkedList rockQuestions = new LinkedList();
@@ -51,7 +57,7 @@ public class Game {
 		return players.size();
 	}
 
-	public void roll(int roll) {
+	public void roll(int roll, List<CategoryType> categories) {
 		System.out.println(players.get(currentPlayer) + " is the current player");
 		System.out.println("They have rolled a " + roll);
 		
@@ -66,7 +72,9 @@ public class Game {
 				System.out.println(players.get(currentPlayer) 
 						+ "'s new location is " 
 						+ places[currentPlayer]);
-				System.out.println("The category is " + currentCategory());
+				selectNewCurrentCategory();
+
+				System.out.println("The category is " + this.currentTurnCategories);
 				askQuestion();
 			} else {
 				System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
@@ -81,34 +89,29 @@ public class Game {
 			System.out.println(players.get(currentPlayer) 
 					+ "'s new location is " 
 					+ places[currentPlayer]);
-			System.out.println("The category is " + currentCategory());
+			selectNewCurrentCategory();
+			System.out.println("The category is " + this.currentTurnCategories);
 			askQuestion();
 		}
 		
 	}
 
 	private void askQuestion() {
-		if (currentCategory() == "Pop")
+
+		if (this.currentTurnCategories == CategoryType.POP)
 			System.out.println(popQuestions.removeFirst());
-		if (currentCategory() == "Science")
+		if (this.currentTurnCategories == CategoryType.POP)
 			System.out.println(scienceQuestions.removeFirst());
-		if (currentCategory() == "Sports")
+		if (this.currentTurnCategories == CategoryType.POP)
 			System.out.println(sportsQuestions.removeFirst());
-		if (currentCategory() == "Rock")
+		if (this.currentTurnCategories == CategoryType.POP)
 			System.out.println(rockQuestions.removeFirst());		
 	}
 	
 	
-	private String currentCategory() {
-		if (places[currentPlayer] == 0) return "Pop";
-		if (places[currentPlayer] == 4) return "Pop";
-		if (places[currentPlayer] == 8) return "Pop";
-		if (places[currentPlayer] == 1) return "Science";
-		if (places[currentPlayer] == 5) return "Science";
-		if (places[currentPlayer] == 9) return "Science";
-		if (places[currentPlayer] == 2) return "Sports";
-		if (places[currentPlayer] == 6) return "Sports";
-		return "Rock";
+	private void selectNewCurrentCategory() {
+		Random rand = new Random();
+		this.currentTurnCategories = this.inGameCategories.get(rand.nextInt(this.inGameCategories.size()));
 	}
 
 	public boolean wasCorrectlyAnswered() {
@@ -165,4 +168,34 @@ public class Game {
 	private boolean didPlayerWin() {
 		return !(purses[currentPlayer] == 6);
 	}
+	
+    public ArrayList getPlayers() {
+		return players;
+	}
+
+	public List<CategoryType> getInGameCategories() {
+		return inGameCategories;
+	}
+	
+	public void selectCategories(List<Category> categories) {
+		Scanner in = new Scanner(System.in);
+		for(String player : this.players) {
+			System.out.println("Player \"" + player + "\", please pick a category below :");
+			for(int i = 0 ; i<categories.size() ; i ++) {
+				System.out.println(i + 1 + ": " + categories.get(i).getCategoryType());
+			}
+			System.out.println("Your choice ? ");
+			String choice = in.nextLine();
+			System.out.println("0: No choice \n");
+			if(Integer.parseInt(choice) > 0) {
+				this.inGameCategories.add(categories.get(Integer.parseInt(choice) - 1).getCategoryType());
+			}
+		}
+		
+		
+		
+		
+	}
+
+
 }

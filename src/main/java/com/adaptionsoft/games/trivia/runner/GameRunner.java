@@ -29,11 +29,17 @@ public class GameRunner {
 		aGame.add("Pat");
 		aGame.add("Sue");
 		
+		aGame.selectCategories(categoryList);
+		System.out.println("Categories selected :");
+		for(CategoryType cat : aGame.getInGameCategories()) {
+			System.out.println(cat);
+		}
+		
 		Random rand = new Random();
 	
 		do {
 			
-			aGame.roll(rand.nextInt(5) + 1);
+			aGame.roll(rand.nextInt(5) + 1,aGame.getInGameCategories());
 			
 			if (rand.nextInt(9) == 7) {
 				notAWinner = aGame.wrongAnswer();

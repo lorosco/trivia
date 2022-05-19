@@ -43,7 +43,7 @@ public class Game {
 	    inPenaltyBox[howManyPlayers()] = false;
 	    
 	    System.out.println(playerName + " was added");
-	    System.out.println("He is the player number " + players.size());
+	    System.out.println("They are player number " + players.size());
 		return true;
 	}
 	
@@ -136,8 +136,8 @@ public class Game {
 			
 			
 		} else {
-
-			System.out.println("Answer was correct!!!!");
+		
+			System.out.println("Answer was corrent!!!!");
 			purses[currentPlayer]++;
 			System.out.println(players.get(currentPlayer) 
 					+ " now has "
